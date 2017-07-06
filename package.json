@@ -1,0 +1,40 @@
+{
+  "name": "thinkjs-application",
+  "description": "application created by thinkjs",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node www/development.js",
+    "compile": "babel src/ --out-dir app/",
+    "watch-compile": "node -e \"console.log('<npm run watch-compile> no longer need, use <npm start> command direct.');console.log();\"",
+    "watch": "npm run watch-compile"
+  },
+  "dependencies": {
+    "thinkjs": "2.2.x",
+    "babel-runtime": "6.x.x",
+    "source-map-support": "0.4.0",
+    "geetest": "latest",
+    "node-crontab": "latest",
+    "nunjucks": "^2.2.0",
+    "pingpp": "latest",
+    "tar.gz": "^1.0.2",
+    "think-pagination": "latest",
+    "think-wechat": "latest",
+    "lodash":"4.x.x",
+    "wechat-api":"latest",
+    "jimp":"latest",
+    "qiniu":"latest",
+    "urllib": ">=0.5.2",
+    "moment": "latest",
+    "superagent": "latest",
+    "segment":"latest"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-core": "^6.20.0"
+  },
+  "repository": "",
+  "license": "MIT"
+}
