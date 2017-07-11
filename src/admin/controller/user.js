@@ -11,7 +11,7 @@ export default class extends Base {
         super.init(http);
         this.db=this.model("member");
         this.tactive = "user";
-        this.pagenum = 5;
+        this.pagenum = 10;
     }
 
      /**
@@ -34,7 +34,34 @@ export default class extends Base {
         this.meta_title="用户列表";
      	return this.display();
      }
-     async changPageNum(){
-     	
+     async adduserAction(){
+        if(this.isPost()){
+            let data = this.post();
+            if(data.password != data.repassword){
+                return this.fail("两次输入密码不一致");
+            }
+            data.password = encryptPassword(data.password);
+            data.reg_time = new Date().getTime();
+            if(data.vip==1){
+                 data.overduedate=new Date(data.overduedate).getTime();
+             }else {
+                 data.overduedate = think.isEmpty(data.overduedate)?0:data.overduedate;
+             }
+             data.status=1;
+             let res = await this.db.add(data);
+              if(res){
+             //添加角色
+             if(data.is_admin == 1){
+                 await this.model("auth_user_role").add({user_id:res,role_id:data.role_id});
+             }
+                 return this.success({name:"添加成功！"});
+             }else{
+                return this.fail("添加失败!")
+             }
+ 
+        }else{
+            this.meta_title="添加用户";
+            return this.display();
+        }
      }
 }

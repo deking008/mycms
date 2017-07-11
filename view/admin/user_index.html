@@ -22,9 +22,9 @@
                     <div class="adv-table editable-table ">
                         <div class="clearfix">
                             <div class="btn-group">
-                                <button id="editable-sample_new" class="btn btn-primary">
+                                <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"  class="btn btn-primary">
                                     添加用户 <i class="fa fa-plus"></i>
-                                </button>
+                                </a>
                                 <button class="btn btn-primary">
                                     启用
                                 </button>
@@ -87,7 +87,7 @@
                                     <td>{{item.id}}</td>
                                     <td>{{item.username}}</td>
                                     <td>{{item.email}}</td>
-                                    <td>{{group.name}}</td>
+                                    <td>{{group.id}}</td>
                                     <td>{{item.reg_ip | int2ip}}</td>
                                     <td>{{item.last_login_time | moment('YYYY-MM-DD HH:mm:ss')}}</td>
                                     <td>{{item.amount}}</td>
@@ -104,10 +104,7 @@
                             </tbody>
                         </table>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="dataTables_info" id="editable-sample_info">Showing 1 to 5 of 28 entries</div>
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="dataTables_paginate paging_bootstrap pagination">
                                     {{pagerData | safe}}
                                 </div>
