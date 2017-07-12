@@ -35,4 +35,15 @@ export default class extends think.controller.base {
 
     }
 
+    /**
+     * 检查当前用户是否为管理员
+     * @param uid
+     * @returns {*|boolean}
+     */
+    async isadmin(uid) {
+        uid = uid || null;
+        uid = think.isEmpty(uid) ? await this.islogin() : uid;
+        return uid && (in_array(parseInt(uid), this.config('user_administrator')));
+    }
+
 }
