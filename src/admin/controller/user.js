@@ -21,7 +21,6 @@ export default class extends Base {
 
     async indexAction() {
         let map = { 'status': ['>', -1] }
-
         let data = await this.db.where(map).page(this.get('page'), this.pagenum).order('id DESC').countSelect();
         let Pages = think.adapter("pages", "page"); //加载名为 dot 的 Template Adapter
         let pages = new Pages(this.http); //实例化 Adapter

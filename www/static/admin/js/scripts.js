@@ -208,6 +208,21 @@ username=deking897&password=123456&repassword=123456&email=12412314%40qq.com&mob
           });
       }
    });
-
-
+/**
+ * ajax post submit请求
+ * <form class = "form-horizontal">
+ * <button target-form="form-horizontal" type="submit" class="ajax-post">确定</button>
+ * confirm,
+ */
+ function ajaxpost(e){
+    e.preventDefault();
+    var target,query,form;
+    var target_form $(this).attr('target_form');
+    var that = this;
+    var nead_confirm=false;
+    if(($(this).attr('type')=='submit') || (target = $(this).attr('href')) || (target = $(this).attr('url'))){
+      
+    }
+ }
+$(document).on('click','.ajax-post',ajaxpost);
 })(jQuery);
