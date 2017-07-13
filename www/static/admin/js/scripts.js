@@ -157,7 +157,10 @@
     $('.popovers').popover();
 
 
+/*
+username=deking897&password=123456&repassword=123456&email=12412314%40qq.com&mobile=1342623423432&groupid=2&score=24&is_admin=1&role_id=2&vip=1&overduedate=2017-07-21+07%3A54
 
+*/
 
 // ajax modal
     $(document).on('click', '[data-toggle="ajaxModal"]',
@@ -173,6 +176,38 @@
       }
     );
 
+//ajax get请求
+/**
+ * <a href="#" class="text-info confirm ajax-get" >删除</a></td>
+ *
+ */
+   $(document).on('click','.ajax-get',function(e){
+      e.preventDefault();
+      var target;
+      var that = this;
+      if($(this).hasClass('confirm')){
+        if(!confirm('确认要执行该操作吗?')){
+            return false;
+        }
+      }
+      if ( (target = $(this).attr('href')) || (target = $(this).attr('url')) ){
+          $.get(target).success(function(data){
+
+            if(data.errno == 0){
+                new $.zui.Messager(data.data.name, {
+                    type: 'success',
+                    time: 1500
+                }).show();
+                setTimeout(function(){
+                  location.reload();
+                },1500);
+            }else{
+
+            }
+
+          });
+      }
+   });
 
 
 })(jQuery);
