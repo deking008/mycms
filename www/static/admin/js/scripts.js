@@ -217,12 +217,41 @@ username=deking897&password=123456&repassword=123456&email=12412314%40qq.com&mob
  function ajaxpost(e){
     e.preventDefault();
     var target,query,form;
-    var target_form $(this).attr('target_form');
+    var target_form = $(this).attr('target-form');
     var that = this;
     var nead_confirm=false;
     if(($(this).attr('type')=='submit') || (target = $(this).attr('href')) || (target = $(this).attr('url'))){
       
+      form = $('.'+target_form);
+      if(form.get(0).nodeName==undefined){
+        return false;
+      }else if(form.get(0).nodeName == 'FORM'){
+        //表单验证
+        if($('[data-validate="parsley"]')){
+          var validate_res =$('[data-validate="parsley"]').parsley().validate();
+          if(true !== validate_res){
+            return false;
+          }
+        }
+        target = form.get(0).action;
+        query = form.serialize();
+        $.post(target,query).success(function(data){
+            if(data.errno == 0){
+                new $.zui.Messager(data.data.name, {
+                    type: 'success',
+                    time: 1500
+                }).show();
+                setTimeout(function(){
+                  location.reload();
+                },1500);
+            }else{
+               //else
+            }
+        });
+      }
     }
  }
 $(document).on('click','.ajax-post',ajaxpost);
+
+
 })(jQuery);
