@@ -19,7 +19,7 @@
                      </span>
                 </header>
                 <div class="panel-body">
-                    <div class="adv-table editable-table ">
+                    <div>
                         <div class="clearfix">
                             <div class="btn-group">
                                 <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"  class="btn btn-primary">
@@ -31,9 +31,9 @@
                                 <button class="btn btn-primary">
                                     禁用
                                 </button>
-                                <button class="btn btn-primary">
+                                <a href="/admin/user/userdel" class="btn btn-primary ajax-post" target-form="ids">
                                     删除
-                                </button>
+                                </a>
                             </div>
                             <div class="btn-group pull-right">
                                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
@@ -65,9 +65,12 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                        <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
+                                    <th>
+                                      <input type="checkbox">
+                                    </th>
                                     <th>uid</th>
                                     <th>用户名</th>
                                     <th>邮箱</th>
@@ -82,12 +85,15 @@
                             </thead>
                             <tbody>
                                 {% for item in list %}
-                                 
+                                  {%set group=item.groupid|get_member_group%}
                                 <tr>
+                                    <td>
+                                      <input class="ids" type="checkbox" name="ids" value="{{item.id}}"/>
+                                    </td>
                                     <td>{{item.id}}</td>
-                                    <td>{{item.username}}</td>
+                                    <td><a href="/admin/user/showuser/id/{{item.id}}" data-toggle="ajaxModal">{{item.username}} <i class="icon icon-zoom-in"></i></a></td>
                                     <td>{{item.email}}</td>
-                                    <td>{{group.id}}</td>
+                                    <td>{{group.name}}</td>
                                     <td>{{item.reg_ip | int2ip}}</td>
                                     <td>{{item.last_login_time | moment('YYYY-MM-DD HH:mm:ss')}}</td>
                                     <td>{{item.amount}}</td>

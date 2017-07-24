@@ -14,18 +14,28 @@
                     {% if i!=0 and i!=99 %}
                     <li class="menu-group">{{v}}</li>
                     {% for v in controller.adminmenu[i] %}
-                    <li class="menu-list"><a href="index.html"><i class="fa {{ v.ico }}"></i> <span>{{ v.title }}</span></a>
+
+                    {% if controller.tactive == v.url %}
+                    <li class="menu-list nav-active">
+                    {% else %}
+                    <li class="menu-list">
+
+                    {% endif %}
+                    <a href="javascript:;"><i class="fa {{ v.ico }}"></i> <span>{{ v.title }}</span></a>
                         <ul class="sub-menu-list">
                             {% for c in v.children %}
-                            <li class="active"><a href="/{{ c.url }}"> {{ c.title }}</a></li>
+                            {% if controller.active == c.url %}
+                            <li class="active">
+                            {% else %}
+                            <li>
+                            {% endif %}
+                            <a href="/{{ c.url }}"> {{ c.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
                     {% endfor %}
                     {% endif %}
                     {% endfor %}
-                    
-                    
                 </ul>
                 <!--sidebar nav end-->
             </div>

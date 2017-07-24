@@ -11,6 +11,7 @@ export default class extends think.model.base {
        let list = await think.cache("all_member_group", () => {
            return this.select();
        }, {timeout: 365 * 24 * 3600});
+
        if(think.isEmpty(map)){
            return list;
        }else {

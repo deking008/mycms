@@ -14,7 +14,7 @@ export default {
             	/**
                  * 获取用户组
                  */
-                env.addFilter('get_member_group',async (groupid,callback)=>{
+                env.addFilter('get_member_group',async(groupid,callback)=>{
                     let data = await think.model("member_group",think.config("db")).getgroup({groupid:groupid});
                     callback(null,data[0]);
                 },true);

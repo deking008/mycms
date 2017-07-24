@@ -66,8 +66,8 @@ export default class extends Base {
 
     async userdelAction(){
         let id = this.param("ids");
+        console.log(id);
         let res;
-        let b;
         // 判断是否是管理员，如果是不能删除;
         if(await this.isadmin(id)){
             return this.fail("不能删管理员");
@@ -81,5 +81,14 @@ export default class extends Base {
                 return this.fail("删除失败！");
             }
         }
+    }
+
+    async showuserAction(){
+        let id = this.get("id");
+        let user = await this.model("member").find(id);
+
+        this.assign("user",user);
+        this.meta_title = "个人信息";
+        return this.display();
     }
 }

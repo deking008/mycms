@@ -20,6 +20,8 @@ export default class extends think.controller.base {
         this.adminmenu = await this.model('menu').getallmenu(this.user.uid,true);
         
         this.assign("setup", this.setup);
+        
+        this.active =this.http.module+"/"+this.http.controller+"/"+this.http.action;
 
     }
 
@@ -46,4 +48,6 @@ export default class extends think.controller.base {
         return uid && (in_array(parseInt(uid), this.config('user_administrator')));
     }
 
+
+   
 }
