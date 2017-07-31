@@ -67,6 +67,9 @@ export default class extends Base {
     async userdelAction(){
         let id = this.param("ids");
         console.log(id);
+        if(!id){
+            return this.fail("请选择你要删除用户");
+        }
         let res;
         // 判断是否是管理员，如果是不能删除;
         if(await this.isadmin(id)){

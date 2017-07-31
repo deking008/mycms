@@ -41,6 +41,25 @@ export default {
                     return _int2iP(int);
                 })
 
+                env.addFilter("in_Array", function (str, arr) {
+                    arr= arr||0;
+                    if (!think.isArray(arr)) {
+                        if(think.isNumber(arr)){
+                            arr = "'"+arr+"'";
+                        }
+                        arr = arr.split(",");
+                    }
+                    //console.log(arr);
+                    return in_array(str, arr);
+                })
+
+                /**
+                 *分析枚举类型配置值 格式 a:名称1,b:名称2
+                 */
+                env.addFilter("parse_config_attr", function (str) {
+                    return parse_config_attr(str)
+                })
+
             }
         }
     }

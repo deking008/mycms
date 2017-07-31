@@ -25,12 +25,12 @@
                                 <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"  class="btn btn-primary">
                                     添加用户 <i class="fa fa-plus"></i>
                                 </a>
-                                <button class="btn btn-primary">
+                                <a class="btn btn-primary ajax-post" href="/admin/user/setstatus/status/1/model/member" target-form="ids">
                                     启用
-                                </button>
-                                <button class="btn btn-primary">
+                                </a>
+                                <a class="btn btn-primary ajax-post" href="/admin/user/setstatus/status/0/model/member" target-form="ids">
                                     禁用
-                                </button>
+                                </a>
                                 <a href="/admin/user/userdel" class="btn btn-primary ajax-post" target-form="ids">
                                     删除
                                 </a>
@@ -85,7 +85,7 @@
                             </thead>
                             <tbody>
                                 {% for item in list %}
-                                  {%set group=item.groupid|get_member_group%}
+                                  {%set group=item.groupid%}
                                 <tr>
                                     <td>
                                       <input class="ids" type="checkbox" name="ids" value="{{item.id}}"/>
@@ -98,7 +98,14 @@
                                     <td>{{item.last_login_time | moment('YYYY-MM-DD HH:mm:ss')}}</td>
                                     <td>{{item.amount}}</td>
                                     <td>{{item.score}}</td>
-                                    <td>状态</td>
+                                    <td>
+                                        {%if item.id|in_Array(controller.config('user_administrator'))%}{%else%}
+                                        <a href="/admin/user/setstatus/ids/{{item.id}}/status/{{1-item.status}}/model/member" class="active ajax-get">
+                                          <i class="icon icon-check text-success {%if item.status %}text-active{%else%}text{%endif%}"></i>
+                                          <i class="icon icon-remove text-danger {%if item.status %}text{%else%}text-active{%endif%}"></i>
+                                        </a>
+                                        {%endif%}
+                                    </td>
                                     <td class="text-center">
                                     <a href="/admin/user/edituser/id/{{item.id}}" class="text-info" data-toggle="ajaxModal">编辑</a>
                                 <a href="/admin/user/recharge/ids/{{item.id}}" class="text-info" data-toggle="ajaxModal">充值</a>

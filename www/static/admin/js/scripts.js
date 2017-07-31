@@ -201,7 +201,10 @@
                         location.reload();
                     }, 1500);
                 } else {
-
+                    new $.zui.Messager(data.errmsg, {
+                        type: 'warning',
+                        time: 1500
+                    }).show();
                 }
 
             });
@@ -254,7 +257,10 @@
                             location.reload();
                         }, 1500);
                     } else {
-                        //else
+                        new $.zui.Messager(data.errmsg, {
+                            type: 'danger',
+                            time: 1500
+                        }).show();
                     }
                 });
         }

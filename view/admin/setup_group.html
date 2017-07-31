@@ -1,0 +1,76 @@
+{% extends "./inc/base.html" %}
+{% block style %}
+<link href="/static/admin/zui/lib/datatable/zui.datatable.min.css" rel="stylesheet">
+{% endblock%}
+{% block content %}
+<section class="vbox">
+    <header class="header bg-light dk">
+        <ul class="nav nav-tabs header-tabs">
+            <li class="active"><a href="#messages-2" data-toggle="tab" class="groupindex">全部配置</a></li>
+            {% for ingredient, amount in setup.CONFIG_GROUP_LIST %}
+            <li ><a href="#{{ ingredient }}" data-toggle="tab" data-groupid="{{ ingredient }}" class="grouplist"> {{ amount }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </header>
+    <section class="scrollable wrapper">
+        <section class="panel panel-default">
+            <header class="panel-heading">
+                <div class="btn-group pull-right">
+                    <a class="btn btn-success btn-xs" href="/admin/setup/add"><i class="fa fa-check-square-o"></i> 添加配置</a>
+
+                </div>
+                配置列表
+                <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i>
+            </header>
+            <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                      <input type="checkbox">
+                                    </th>
+                                    <th>ID</th>
+                                    <th>名称</th>
+                                    <th>标题</th>
+                                    <th>分组</th>
+                                    <th>类型</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in list %}
+                                <tr>
+                                    <td>
+                                      <input class="ids" type="checkbox" name="ids" value="{{item.id}}"/>
+                                    </td>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.title }}</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td class="text-center">
+                                    <a href="/admin/setup/edituser/id/{{item.id}}" class="text-info" data-toggle="ajaxModal">编辑</a>
+                                <a href="/admin/setup/userdel?ids={{item.id}}" class="text-info confirm ajax-get">删除</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="dataTables_paginate paging_bootstrap pagination">
+                                    {{pagerData | safe}}
+                                </div>
+                            </div>
+                        </div>
+        </section>
+    </section>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/static/admin/zui/lib/datatable/zui.datatable.min.js"></script>
+ <script type="text/javascript">
+
+ </script>
+{% endblock %}
